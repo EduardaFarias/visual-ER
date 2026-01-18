@@ -1,0 +1,102 @@
+{
+  "tables": {
+    "Hospital": {
+      "*hospital_id": "int() NOT NULL",
+      "name": "varchar(100) NOT NULL",
+      "address": "varchar(200) NOT NULL"
+    },
+    "Department": {
+      "*department_id": "int() NOT NULL",
+      "+hospital_id": "int()",
+      "name": "varchar(100) NOT NULL",
+      "coordinator": "varchar(100) NOT NULL"
+    },
+    "Person": {
+      "*person_id": "int() NOT NULL",
+      "full_name": "varchar(100) NOT NULL",
+      "cpf": "varchar(11) NOT NULL",
+      "rg": "varchar(10) NOT NULL",
+      "date_of_birth": "date() NOT NULL",
+      "address": "varchar(200) NOT NULL"
+    },
+    "Employee": {
+      "*employee_id": "int() NOT NULL",
+      "+person_id": "int()",
+      "professional_credentials": "varchar(100) NOT NULL",
+      "role": "varchar(50) NOT NULL"
+    },
+    "Patient": {
+      "*patient_id": "int() NOT NULL",
+      "+person_id": "int()",
+      "identification_wristband": "varchar(20) NOT NULL",
+      "status": "varchar(20) NOT NULL"
+    },
+    "Visitor": {
+      "*visitor_id": "int() NOT NULL",
+      "+person_id": "int()",
+      "type": "varchar(20) NOT NULL",
+      "identification_card": "varchar(20) NOT NULL"
+    },
+    "Address": {
+      "*address_id": "int() NOT NULL",
+      "+person_id": "int()",
+      "address": "varchar(200) NOT NULL",
+      "last_update": "timestamp() NOT NULL"
+    },
+    "IdentificationCard": {
+      "*identification_card_id": "int() NOT NULL",
+      "+employee_id": "int()",
+      "issue_date": "date() NOT NULL",
+      "expiry_date": "date() NOT NULL",
+      "access_level": "varchar(10) NOT NULL"
+    },
+    "EmployeeSchedule": {
+      "*employee_schedule_id": "int() NOT NULL",
+      "+employee_id": "int()",
+      "work_pattern": "varchar(20) NOT NULL",
+      "schedule": "varchar(50) NOT NULL"
+    },
+    "TimeClockRecord": {
+      "*time_clock_record_id": "int() NOT NULL",
+      "+employee_id": "int()",
+      "clock_in": "timestamp() NOT NULL",
+      "clock_out": "timestamp() NOT NULL"
+    },
+    "WorkShift": {
+      "*work_shift_id": "int() NOT NULL",
+      "+employee_id": "int()",
+      "start_time": "time() NOT NULL",
+      "end_time": "time() NOT NULL"
+    },
+    "AvailabilityException": {
+      "*availability_exception_id": "int() NOT NULL",
+      "+employee_id": "int()",
+      "start_date": "date() NOT NULL",
+      "end_date": "date() NOT NULL",
+      "type": "varchar(20) NOT NULL",
+      "note": "text()"
+    },
+    "DepartmentOccupancy": {
+      "*department_occupancy_id": "int() NOT NULL",
+      "+department_id": "int()",
+      "occupancy": "int() NOT NULL",
+      "capacity": "int() NOT NULL"
+    }
+  },
+  "relations": [
+    "Hospital:hospital_id 1--* Department:hospital_id",
+    "Department:department_id 1--* Employee:department_id",
+    "Person:person_id 1--* Employee:person_id",
+    "Person:person_id 1--* Patient:person_id",
+    "Person:person_id 1--* Visitor:person_id",
+    "Person:person_id 1--* Address:person_id",
+    "Employee:employee_id 1--* IdentificationCard:employee_id",
+    "Employee:employee_id 1--* EmployeeSchedule:employee_id",
+    "Employee:employee_id 1--* TimeClockRecord:employee_id",
+    "Employee:employee_id 1--* WorkShift:employee_id",
+    "Employee:employee_id 1--* AvailabilityException:employee_id",
+    "Department:department_id 1--* DepartmentOccupancy:department_id"
+  ],
+  "rankAdjustments": "",
+  "label": "Integrated Hospital Management System"
+}

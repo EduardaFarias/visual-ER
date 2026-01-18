@@ -1,0 +1,222 @@
+/* created with ERDot < https://github.com/ehne/ERDot > */
+digraph G {
+    graph [
+        nodesep=0.5;
+        rankdir="LR";
+        concentrate=true;
+        splines="spline";
+        fontname="Helvetica";
+        pad="0.2,0.2",
+        label="Integrated Hospital Management System",
+        
+    ];
+    
+    node [shape=plain, fontname="Helvetica"];
+    edge [
+        dir=both,
+        fontsize=12,
+        arrowsize=0.9,
+        penwidth=1.0,
+        labelangle=32,
+        labeldistance=1.8,
+        fontname="Helvetica"
+    ];
+    
+    "Hospital" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Hospital</i></td></tr>
+        <tr><td port="hospital_id" align="left" cellpadding="5">PK hospital_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="name" align="left" cellpadding="5">name <font color="grey60">varchar(100) NOT NULL</font></td></tr>
+        <tr><td port="address" align="left" cellpadding="5">address <font color="grey60">varchar(200) NOT NULL</font></td></tr>
+    </table>>];
+    "Department" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Department</i></td></tr>
+        <tr><td port="department_id" align="left" cellpadding="5">PK department_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="hospital_id" align="left" cellpadding="5">FK hospital_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="name" align="left" cellpadding="5">name <font color="grey60">varchar(100) NOT NULL</font></td></tr>
+        <tr><td port="coordinator" align="left" cellpadding="5">coordinator <font color="grey60">varchar(100) NOT NULL</font></td></tr>
+    </table>>];
+    "Person" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Person</i></td></tr>
+        <tr><td port="person_id" align="left" cellpadding="5">PK person_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="full_name" align="left" cellpadding="5">full_name <font color="grey60">varchar(100) NOT NULL</font></td></tr>
+        <tr><td port="cpf" align="left" cellpadding="5">cpf <font color="grey60">varchar(11) NOT NULL</font></td></tr>
+        <tr><td port="rg" align="left" cellpadding="5">rg <font color="grey60">varchar(10) NOT NULL</font></td></tr>
+        <tr><td port="date_of_birth" align="left" cellpadding="5">date_of_birth <font color="grey60">date() NOT NULL</font></td></tr>
+        <tr><td port="address" align="left" cellpadding="5">address <font color="grey60">varchar(200) NOT NULL</font></td></tr>
+    </table>>];
+    "Employee" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Employee</i></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">PK employee_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="person_id" align="left" cellpadding="5">FK person_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="professional_credentials" align="left" cellpadding="5">professional_credentials <font color="grey60">varchar(100) NOT NULL</font></td></tr>
+        <tr><td port="role" align="left" cellpadding="5">role <font color="grey60">varchar(50) NOT NULL</font></td></tr>
+    </table>>];
+    "Patient" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Patient</i></td></tr>
+        <tr><td port="patient_id" align="left" cellpadding="5">PK patient_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="person_id" align="left" cellpadding="5">FK person_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="identification_wristband" align="left" cellpadding="5">identification_wristband <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+        <tr><td port="status" align="left" cellpadding="5">status <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+    </table>>];
+    "Visitor" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Visitor</i></td></tr>
+        <tr><td port="visitor_id" align="left" cellpadding="5">PK visitor_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="person_id" align="left" cellpadding="5">FK person_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="type" align="left" cellpadding="5">type <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+        <tr><td port="identification_card" align="left" cellpadding="5">identification_card <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+    </table>>];
+    "Address" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>Address</i></td></tr>
+        <tr><td port="address_id" align="left" cellpadding="5">PK address_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="person_id" align="left" cellpadding="5">FK person_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="address" align="left" cellpadding="5">address <font color="grey60">varchar(200) NOT NULL</font></td></tr>
+        <tr><td port="last_update" align="left" cellpadding="5">last_update <font color="grey60">timestamp() NOT NULL</font></td></tr>
+    </table>>];
+    "IdentificationCard" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>IdentificationCard</i></td></tr>
+        <tr><td port="identification_card_id" align="left" cellpadding="5">PK identification_card_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">FK employee_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="issue_date" align="left" cellpadding="5">issue_date <font color="grey60">date() NOT NULL</font></td></tr>
+        <tr><td port="expiry_date" align="left" cellpadding="5">expiry_date <font color="grey60">date() NOT NULL</font></td></tr>
+        <tr><td port="access_level" align="left" cellpadding="5">access_level <font color="grey60">varchar(10) NOT NULL</font></td></tr>
+    </table>>];
+    "EmployeeSchedule" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>EmployeeSchedule</i></td></tr>
+        <tr><td port="employee_schedule_id" align="left" cellpadding="5">PK employee_schedule_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">FK employee_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="work_pattern" align="left" cellpadding="5">work_pattern <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+        <tr><td port="schedule" align="left" cellpadding="5">schedule <font color="grey60">varchar(50) NOT NULL</font></td></tr>
+    </table>>];
+    "TimeClockRecord" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>TimeClockRecord</i></td></tr>
+        <tr><td port="time_clock_record_id" align="left" cellpadding="5">PK time_clock_record_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">FK employee_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="clock_in" align="left" cellpadding="5">clock_in <font color="grey60">timestamp() NOT NULL</font></td></tr>
+        <tr><td port="clock_out" align="left" cellpadding="5">clock_out <font color="grey60">timestamp() NOT NULL</font></td></tr>
+    </table>>];
+    "WorkShift" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>WorkShift</i></td></tr>
+        <tr><td port="work_shift_id" align="left" cellpadding="5">PK work_shift_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">FK employee_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="start_time" align="left" cellpadding="5">start_time <font color="grey60">time() NOT NULL</font></td></tr>
+        <tr><td port="end_time" align="left" cellpadding="5">end_time <font color="grey60">time() NOT NULL</font></td></tr>
+    </table>>];
+    "AvailabilityException" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>AvailabilityException</i></td></tr>
+        <tr><td port="availability_exception_id" align="left" cellpadding="5">PK availability_exception_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="employee_id" align="left" cellpadding="5">FK employee_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="start_date" align="left" cellpadding="5">start_date <font color="grey60">date() NOT NULL</font></td></tr>
+        <tr><td port="end_date" align="left" cellpadding="5">end_date <font color="grey60">date() NOT NULL</font></td></tr>
+        <tr><td port="type" align="left" cellpadding="5">type <font color="grey60">varchar(20) NOT NULL</font></td></tr>
+        <tr><td port="note" align="left" cellpadding="5">note <font color="grey60">text()</font></td></tr>
+    </table>>];
+    "DepartmentOccupancy" [ label=<
+        <table border="0" cellborder="1" cellspacing="0" >
+        <tr><td><i>DepartmentOccupancy</i></td></tr>
+        <tr><td port="department_occupancy_id" align="left" cellpadding="5">PK department_occupancy_id <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="department_id" align="left" cellpadding="5">FK department_id <font color="grey60">int()</font></td></tr>
+        <tr><td port="occupancy" align="left" cellpadding="5">occupancy <font color="grey60">int() NOT NULL</font></td></tr>
+        <tr><td port="capacity" align="left" cellpadding="5">capacity <font color="grey60">int() NOT NULL</font></td></tr>
+    </table>>];
+
+    
+    "Hospital":"hospital_id"->"Department":"hospital_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Department":"department_id"->"Employee":"department_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Person":"person_id"->"Employee":"person_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Person":"person_id"->"Patient":"person_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Person":"person_id"->"Visitor":"person_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Person":"person_id"->"Address":"person_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Employee":"employee_id"->"IdentificationCard":"employee_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Employee":"employee_id"->"EmployeeSchedule":"employee_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Employee":"employee_id"->"TimeClockRecord":"employee_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Employee":"employee_id"->"WorkShift":"employee_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Employee":"employee_id"->"AvailabilityException":"employee_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+    
+    "Department":"department_id"->"DepartmentOccupancy":"department_id" [
+        arrowhead=ocrow,
+
+        arrowtail=noneotee,
+    ];
+
+
+
+    
+
+}
